@@ -1,0 +1,9 @@
+{
+    "require": {
+        "dg/twitter-php": "^3.8",
+        "telegram-bot/api": "^2.3.17",
+        "facebook/graph-sdk": "^5.7",
+        "zoonman/linkedin-api-php-client": "^0.0.14",
+        "facebook/facebook-instant-articles-sdk-php": "^1.10"
+    }
+}

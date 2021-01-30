@@ -1,0 +1,2 @@
+.store-pane { display: none; }
+.store-pane.active { display: block; }
