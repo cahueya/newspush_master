@@ -1,8 +1,8 @@
 The MIT License (MIT)
 
-Portions Copyright (c) 2019 concrete5 Push to Twitter
+Portions Copyright (c) 2019 concrete5 Newspush
 
-Copyright (c) 2019 cahueya
+Copyright (c) 2021 cahueya
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
