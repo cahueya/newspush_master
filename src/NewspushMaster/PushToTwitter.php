@@ -22,12 +22,20 @@ class PushToTwitter {
             Log::addInfo('Twitter not authenticated');
             die('Invalid credentials for Twitter');
         } else {
-            $strippedmessage = strip_tags ($publish_path."\n".$page_content); 
+            $br = array("<br />","<br>","<br/>");
+            $plaintext = strip_tags(
+                html_entity_decode(
+                    str_ireplace($br,'\n',$page_content),
+                    ENT_COMPAT,
+                    "utf-8"
+                )
+            );
+            $strippedmessage = $plaintext;
             $message = substr($strippedmessage,0,280);
             $twitter->send($message);
         }
     }
-}	
+}
 
 
 
