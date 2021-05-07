@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PushToConcrete5 {
 
-    public function push($apiURL,$api_pagepath,$rest_client_id,$rest_client_secret,$page_content,$page_name,$page_description,$page_tags)
+    public function push($apiURL,$api_pagepath,$rest_client_id,$rest_client_secret,$page_content,$page_name,$page_description,$page_tags,$encoded_data,$filetitle)
     {
 
         $accessTokenURL = '/index.php/oauth/2.0/token';
@@ -61,7 +61,9 @@ class PushToConcrete5 {
             'blogTitle' => $page_name,
             'userID' => '1',
             'blogDesc' => $page_description,
-            'blogContent' => $page_content
+            'blogContent' => $page_content,
+            'image' => $encoded_data,
+            'filename' => $filetitle
         ];
         $params = json_encode($params_raw);
         $url_params = $apiURL.$endpointURL;
@@ -81,8 +83,8 @@ class PushToConcrete5 {
         ));  
         $secondresponse = curl_exec($curl);
         curl_close($curl);
-        echo $secondresponse;
-                Log::addInfo('Läuft durch: '.$apiURL.$rest_client_id.$secondresponse);
+        //echo $secondresponse;
+                Log::addInfo('Läuft durch: '.$secondresponse);
 
     }
 }	
