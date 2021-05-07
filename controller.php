@@ -18,7 +18,7 @@ use Concrete\Core\Attribute\Set as AttributeSet;
 class Controller extends Package {
 	protected $pkgHandle = 'newspush_master';
 	protected $appVersionRequired = '8.4';
-	protected $pkgVersion = '0.0.21';
+	protected $pkgVersion = '0.0.33';
 
     protected $pkgAutoloaderRegistries = [
         'src/NewspushMaster' => '\Concrete\Package\NewspushMaster',
@@ -61,6 +61,7 @@ class Controller extends Package {
         }
 
         $text = AttributeType::getByHandle('text');
+        $boolean = AttributeType::getByHandle('boolean');
 
         self::installUserAttribute('user_apiURL', $text, $pkg, $custSet);
         self::installUserAttribute('user_api_pagepath', $text, $pkg, $custSet);
@@ -82,6 +83,11 @@ class Controller extends Package {
         self::installUserAttribute('user_fb_app_long_token', $text, $pkg, $custSet);
         self::installUserAttribute('user_fb_app_long_page_token', $text, $pkg, $custSet);
         self::installUserAttribute('user_fb_app_long_page_token_expiry', $text, $pkg, $custSet);
+        self::installUserAttribute('activate_rest_api', $boolean, $pkg, $custSet);
+        self::installUserAttribute('activate_twitter', $boolean, $pkg, $custSet);
+        self::installUserAttribute('activate_telegram', $boolean, $pkg, $custSet);
+        self::installUserAttribute('activate_facebook', $boolean, $pkg, $custSet);
+
     }
 
     public static function installUserAttribute($handle, $type, $pkg, $set, $data = null)
