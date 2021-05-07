@@ -46,55 +46,110 @@ foreach ($session->getFlashBag()->get('error', array()) as $error) {
 
 
             <div class="col-sm-9 store-pane active" id="overview">
-                <?php if(!empty($apiURL)&&!empty($api_pagepath)&&!empty($rest_client_id)&&!empty($rest_client_secret)){ ?>
+                <?php if(!empty($apiURL)&&!empty($api_pagepath)&&!empty($rest_client_id)&&!empty($rest_client_secret)&&!empty($activate_rest_api)){ ?>
                     <div class="alert alert-success" role="alert">
-                        <?= t('REST API Credentials are set')?>
+                        <?= t('REST API is active')?>
                     </div>
                 <?php } else { ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?= t('REST API Credentials are missing')?>
-                    </div>
+                    <?php if(!empty($apiURL)&&!empty($api_pagepath)&&!empty($rest_client_id)&&!empty($rest_client_secret)){ ?>
+                        <div class="alert alert-warning" role="alert">
+                            <?= t('REST API Credentials are set')?>
+                        </div>
+                    <?php } else { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= t('REST API Credentials are missing')?>
+                        </div>
+                    <?php } ?>
                 <?php } ?>
 
-                <?php if(!empty($tw_consumerKey)&&!empty($tw_consumerSecret)&&!empty($tw_accessToken)&&!empty($tw_accessTokenSecret)){ ?>
-                    <div class="alert alert-success" role="alert">
-                        <?= t('Twitter Credentials are set')?>
-                    </div>
+
+
+
+                <?php if(!empty($tw_consumerKey)&&!empty($tw_consumerSecret)&&!empty($tw_accessToken)&&!empty($tw_accessTokenSecret)&&!empty($activate_twitter)){ ?>
+                        <div class="alert alert-success" role="alert">
+                            <?= t('Twitter is active')?>
+                        </div>
                 <?php } else { ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?= t('Twitter Credentials are missing')?>
-                    </div>
+                    <?php if(!empty($tw_consumerKey)&&!empty($tw_consumerSecret)&&!empty($tw_accessToken)&&!empty($tw_accessTokenSecret)){ ?>
+                        <div class="alert alert-warning" role="alert">
+                            <?= t('Twitter Credentials are set')?>
+                        </div>
+                    <?php } else { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= t('Twitter Credentials are missing')?>
+                        </div>
+                    <?php } ?>
                 <?php } ?>
 
-                <?php if(!empty($telegramBotToken)&&!empty($telegramChatID)){ ?>
+
+
+
+
+
+
+
+
+                <?php if(!empty($telegramBotToken)&&!empty($telegramChatID)&&!empty($activate_telegram)){ ?>
                     <div class="alert alert-success" role="alert">
-                        <?= t('Telegram Credentials are set')?>
+                        <?= t('Telegram is active')?>
+                    </div>
+                <?php } else { ?> 
+                    <?php if(!empty($telegramBotToken)&&!empty($telegramChatID)){ ?>
+                        <div class="alert alert-warning" role="alert">
+                            <?= t('Telegram Credentials are set')?>
+                        </div>
+                    <?php } else { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= t('Telegram Credentials are missing')?>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+
+
+
+
+                <?php if(!empty($fb_app_id)&&!empty($fb_app_secret)&&!empty($fb_app_long_page_token)&&!empty($activate_facebook)){ ?>
+                    <div class="alert alert-success" role="alert">
+                         <?= t('Facebook is active')?>
                     </div>
                 <?php } else { ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?= t('Telegram Credentials are missing')?>
-                    </div>
+                    <?php if(!empty($fb_app_id)&&!empty($fb_app_secret)&&!empty($fb_app_long_page_token)){ ?>
+                        <div class="alert alert-warning" role="alert">
+                            <?= t('Facebook Credentials are set')?>
+                        </div>
+                    <?php } else { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= t('Facebook Credentials are missing')?>
+                        </div>
+                    <?php } ?>
                 <?php } ?>
-                <?php if(!empty($fb_app_id)&&!empty($fb_app_secret)&&!empty($fb_app_url)&&!empty($fb_app_long_page_token)){ ?>
-                    <div class="alert alert-success" role="alert">
-                        <?= t('Facebook Credentials are set')?>
-                    </div>
-                <?php } else { ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?= t('Facebook Credentials are missing')?>
-                    </div>
-                <?php } ?>
+
+
+
+
+
+
             </div><!-- #overview -->
 
             <div class="col-sm-9 store-pane" id="rest-api">
                 <fieldset>
-                    <div class="col-xs-12 col-md-12">     
+                    <div class="col-xs-12 col-md-12">
+
                         <legend><?php echo t('REST API Data'); ?>
                             <span id="helpBlock" class="help-block">
                                 Get yourself a REST API
                             </span>
                         </legend>  
                     </div>
+                     <div class="col-xs-12 col-md-12">
+                        <div class="form-group">
+                            <label>
+                                <input id="activate_rest_api" class="ccm-input-checkbox" type="checkbox" value="true" name="activate_rest_api" <?php if (isset($activate_rest_api) && $activate_rest_api == 1) echo 'checked'; else if (!isset($activate_rest_api)) echo ' ' ?>>
+                                <?= t('Activate'); ?>
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
                             <label for="apiURL"><?php echo t('URL of your API Client'); ?></label>
@@ -130,27 +185,35 @@ foreach ($session->getFlashBag()->get('error', array()) as $error) {
                                 'You need to apply for a developer account at %s to get the access keys.', $twitterurl); ?></span>
                         </legend>  
                     </div>
+                    <div class="col-xs-12 col-md-12">
+                        <div class="form-group">
+                            <label>
+                                <input id="activate_twitter" class="ccm-input-checkbox" type="checkbox" value="true" name="activate_twitter" <?php if (isset($activate_twitter) && $activate_twitter == 1) echo 'checked'; else if (!isset($activate_twitter)) echo ' ' ?>>
+                                <?= t('Activate'); ?>
+                            </label>
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
-                            <label for="tw_consumerKey"><?php echo t('Consumer Key'); ?></label>
+                            <label for="tw_consumerKey"><?php echo t('API Key'); ?></label>
                             <?php echo $form->text('tw_consumerKey', $tw_consumerKey, array('class' => 'span2', 'placeholder'=>t('Consumer Key')))?>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
-                            <label for="tw_consumerSecret"><?php echo t('Consumer Secret'); ?></label>
+                            <label for="tw_consumerSecret"><?php echo t('API Secret'); ?></label>
                             <?php echo $form->text('tw_consumerSecret', $tw_consumerSecret, array('class' => 'span2', 'placeholder'=>t('Consumer Secret')))?>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
-                            <label for="tw_accessToken"><?php echo t('Access Key'); ?></label>
+                            <label for="tw_accessToken"><?php echo t('Access Token'); ?></label>
                             <?php echo $form->text('tw_accessToken', $tw_accessToken, array('class' => 'span2', 'placeholder'=>t('Access Token')))?>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
-                            <label for="tw_accessTokenSecret"><?php echo t('Access Secret'); ?></label>
+                            <label for="tw_accessTokenSecret"><?php echo t('Access Token Secret'); ?></label>
                             <?php echo $form->text('tw_accessTokenSecret', $tw_accessTokenSecret, array('class' => 'span2', 'placeholder'=>t('Access Token Secret')))?>
                         </div>
                     </div> 
@@ -165,6 +228,14 @@ foreach ($session->getFlashBag()->get('error', array()) as $error) {
                                 'You need to set up a Telegram Bot to get the token. Add the Bot to the group or channel of your choince and call it with "/start @BotName". After that, hit the "Get Chat ID button.'); ?></span>
                         </legend>  
                     </div> 
+                    <div class="col-xs-12 col-md-12">
+                        <div class="form-group">
+                            <label>
+                                <input id="activate_telegram" class="ccm-input-checkbox" type="checkbox" value="true" name="activate_telegram" <?php if (isset($activate_telegram) && $activate_telegram == 1) echo 'checked'; else if (!isset($activate_telegram)) echo ' ' ?>>
+                                <?= t('Activate'); ?>
+                            </label>
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-md-8">
                         <div class="form-group">
                             <label for="telegramBotToken"><?php echo t('Telegram Token'); ?></label>
@@ -189,16 +260,18 @@ foreach ($session->getFlashBag()->get('error', array()) as $error) {
                                 'You need to set up a Facebook developer account to get the data.'); ?></span>
                         </legend>  
                     </div> 
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12 col-md-12">
                         <div class="form-group">
-                            <label for="fb_app_id"><?php echo t('FB App ID'); ?></label>
-                            <?php echo $form->text('fb_app_id', $fb_app_id, array('class' => 'span2', 'placeholder'=>t('FB App ID')))?>
+                            <label>
+                                <input id="activate_facebook" class="ccm-input-checkbox" type="checkbox" value="true" name="activate_facebook" <?php if (isset($activate_facebook) && $activate_facebook == 1) echo 'checked'; else if (!isset($activate_facebook)) echo ' ' ?>>
+                                <?= t('Activate'); ?>
+                            </label>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
-                            <label for="fb_app_url"><?php echo t('URL of your FB Page'); ?></label>
-                            <?php echo $form->text('fb_app_url', $fb_app_url, array('class' => 'span2', 'placeholder'=>t('URL of your FB Page')))?>
+                            <label for="fb_app_id"><?php echo t('FB App ID'); ?></label>
+                            <?php echo $form->text('fb_app_id', $fb_app_id, array('class' => 'span2', 'placeholder'=>t('FB App ID')))?>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-12">
