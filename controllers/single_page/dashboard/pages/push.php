@@ -43,12 +43,17 @@ class Push extends DashboardPageController
 
         $fb_app_id = $ui->getAttribute('user_fb_app_id');
         $fb_app_secret = $ui->getAttribute('user_fb_app_secret');
-        $fb_app_url = $ui->getAttribute('user_fb_app_url');
+        //$fb_app_url = $ui->getAttribute('user_fb_app_url');
         $fb_app_pageid = $ui->getAttribute('user_fb_app_pageid');
         $fb_app_token = $ui->getAttribute('user_fb_app_token');
         $fb_app_long_token = $ui->getAttribute('user_fb_app_long_token');
         $fb_app_long_page_token = $ui->getAttribute('user_fb_app_long_page_token');
         $fb_app_long_page_token_expiry = $ui->getAttribute('user_fb_app_long_page_token_expiry');
+
+        $activate_rest_api = $ui->getAttribute('activate_rest_api');
+        $activate_telegram = $ui->getAttribute('activate_telegram');
+        $activate_twitter = $ui->getAttribute('activate_twitter');
+        $activate_facebook = $ui->getAttribute('activate_facebook');
 
 
         $this->set('li_app_secret', $li_app_secret);
@@ -65,16 +70,20 @@ class Push extends DashboardPageController
         $this->set('telegramChatID', $telegramChatID);
         $this->set('fb_app_id', $fb_app_id);
         $this->set('fb_app_secret', $fb_app_secret);
-        $this->set('fb_app_url', $fb_app_url);
+        //$this->set('fb_app_url', $fb_app_url);
         $this->set('fb_app_pageid', $fb_app_pageid);
         $this->set('fb_app_token', $fb_app_token);
         $this->set('fb_app_long_token', $fb_app_long_token);
         $this->set('fb_app_long_page_token', $fb_app_long_page_token);
         $this->set('fb_app_long_page_token_expiry', $fb_app_long_page_token_expiry);
 
+        $this->set('activate_rest_api', $activate_rest_api);
+        $this->set('activate_twitter', $activate_twitter);
+        $this->set('activate_telegram', $activate_telegram);
+        $this->set('activate_facebook', $activate_facebook);
+
         $this->requireAsset('css', 'push');
         $this->requireAsset('javascript', 'push');
-  
     }
 
     public function update_configuration() {
@@ -102,9 +111,14 @@ class Push extends DashboardPageController
 
            $fb_app_id = $this->post('fb_app_id');
            $fb_app_secret = $this->post('fb_app_secret');
-           $fb_app_url = $this->post('fb_app_url');
+           //$fb_app_url = $this->post('fb_app_url');
            $fb_app_pageid = $this->post('fb_app_pageid');
            $fb_app_token = $this->post('fb_app_token');
+
+           $activate_rest_api = $this->post('activate_rest_api');
+           $activate_twitter = $this->post('activate_twitter');
+           $activate_telegram = $this->post('activate_telegram');
+           $activate_facebook = $this->post('activate_facebook');
 
            $pkg = Package::getByHandle('newspush_master');
            $u = new User();
@@ -126,9 +140,14 @@ class Push extends DashboardPageController
 
            $user->setAttribute('user_fb_app_id', $fb_app_id);
            $user->setAttribute('user_fb_app_secret', $fb_app_secret);
-           $user->setAttribute('user_fb_app_url', $fb_app_url);
+           //$user->setAttribute('user_fb_app_url', $fb_app_url);
            $user->setAttribute('user_fb_app_pageid', $fb_app_pageid);
            $user->setAttribute('user_fb_app_token', $fb_app_token);
+
+           $user->setAttribute('activate_rest_api', $activate_rest_api);
+           $user->setAttribute('activate_twitter', $activate_twitter);
+           $user->setAttribute('activate_telegram', $activate_telegram);
+           $user->setAttribute('activate_facebook', $activate_facebook);
                     
            $this->set('message', t("Configuration saved"));
         }
@@ -207,10 +226,9 @@ class Push extends DashboardPageController
         $pkg = Package::getByHandle('newspush_master');
         $fb_app_token = $user->getAttribute('user_fb_app_token');
         $fb_app_id = $user->getAttribute('user_fb_app_id');
-        $fb_app_url = $user->getAttribute('user_fb_app_url');
+        //$fb_app_url = $user->getAttribute('user_fb_app_url');
         $fb_app_pageid = $user->getAttribute('user_fb_app_pageid');
         $fb_app_secret = $user->getAttribute('user_fb_app_secret');
-        //$fb_app_long_token ='EAAEdw5kIOiwBAHVi3kb0OT2nBr7fnEytTUGjkzXGxr6MUyKgWBXDXMZA8l9s8WNICN4OZCh4Mw3ysBd36ZChZBd0sGJJbkFjoU9n1WazSWo31dU4dSZCcQ3A5AJR8eCkcMb9PutG9adqj3CwRaBbUjFvNzdssn1RK0Ky6qQVaDnBWoLrZA6eS98iY7O4uRaRHHG72LVt5FdLspeB5Bi9L2';
         $fb_app_long_token = $user->getAttribute('user_fb_app_long_token');
         $fb_app_long_page_token = $user->getAttribute('fb_app_long_page_token');
 
@@ -236,10 +254,14 @@ class Push extends DashboardPageController
                         CURLOPT_HTTPHEADER => array('content-Type: application/x-www-form-urlencoded'),
                         CURLOPT_URL => $params
                     ));
+
                     $response = curl_exec($curl);
+
                     if(!$response){die("Connection Failure");}
                     curl_close($curl);
                     $data = json_decode($response, true);
+                    $logdata = print_r($data,1);
+                    Log::addInfo('Response: '.$logdata);
                     $returntoken = $data['access_token'];
                     $user->setAttribute('user_fb_app_long_token', $returntoken);
                 } catch (\RuntimeException $e) {
