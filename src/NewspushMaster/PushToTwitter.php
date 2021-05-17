@@ -1,16 +1,10 @@
 <?php
 namespace  Concrete\Package\NewspushMaster;
-use Concrete\Core\Http\ServerInterface;
-use Concrete\Core\Package\Package;
 use Database;
 use Core;
 use Events;
 use Log;
 use Loader;
-use Concrete\Core\Page\Collection\Collection;
-use Concrete\Core\Page\Page;
-use Whoops\Exception\ErrorException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 class PushToTwitter {
