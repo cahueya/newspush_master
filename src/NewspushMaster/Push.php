@@ -1,22 +1,16 @@
 <?php
 namespace  Concrete\Package\NewspushMaster;
-use Concrete\Core\Http\ServerInterface;
 use Concrete\Core\Package\Package;
 use Database;
 use Core;
 use Events;
 use Log;
 use Loader;
-use Concrete\Core\Page\Collection\Collection;
-use Concrete\Core\Page\Page;
-use Whoops\Exception\ErrorException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use \File;
 use Concrete\Package\NewspushMaster\PushToTelegram;
 use Concrete\Package\NewspushMaster\PushToTwitter;
 use Concrete\Package\NewspushMaster\PushToConcrete5;
 use Concrete\Package\NewspushMaster\PushToFacebook;
-
 use Concrete\Core\User\User;
 use Concrete\Core\User\UserInfo;
 
