@@ -3,8 +3,6 @@ namespace  Concrete\Package\NewspushMaster;
 
 use Longman\TelegramBot\Telegram;
 use Longman\TelegramBot\Request;
-//use Telegram;
-use GuzzleHttp;
 use Log;
 
 class PushToTelegram {
