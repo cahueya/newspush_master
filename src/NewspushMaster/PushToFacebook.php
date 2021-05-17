@@ -1,18 +1,15 @@
 <?php
 namespace  Concrete\Package\NewspushMaster;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Facebook\FacebookRequestException;
+use Facebook\FileUpload\FacebookFile;
 use Whoops\Exception\ErrorException;
 use Concrete\Core\Package\Package;
 use Concrete\Core\User\UserInfo;
 use Concrete\Core\User\User;
-//use GuzzleHttp;
+use Facebook\Facebook;
 use Core;
 use Log;
-use Facebook\Facebook;
-//use Facebook\FacebookRequest;
-//use Facebook\GraphObject;
-use Facebook\FacebookRequestException;
-use Facebook\FileUpload\FacebookFile;
 
 class PushToFacebook {
 
