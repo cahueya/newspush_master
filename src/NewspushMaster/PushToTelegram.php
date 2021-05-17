@@ -9,7 +9,7 @@ use Log;
 
 class PushToTelegram {
 
-    public function push($telegramBotToken,$telegramChatID,$page_name,$page_content,$imgurl,$encoded_data,$filetitle,$file)
+    public function push($telegramBotToken,$telegramChatID,$page_name,$page_content,$encoded_data,$fullpath)
     {
 
         $bot_username = 'Bot';
@@ -23,16 +23,14 @@ class PushToTelegram {
             )
         );
 
-        if(!empty($imgurl)) {
+        if(!empty($fullpath)) {
             try {      
                 $result = Request::sendPhoto([
                     'chat_id' => $telegramChatID,
-                    'photo'   => Request::encodeFile($imgurl),
+                    'photo'   => $fullpath,
                     'caption' => $plaintext,
                 ]);
             } catch (Longman\TelegramBot\Exception\TelegramException $e) {
-            // log telegram errors
-            // echo $e->getMessage();
             }
         } else {
             try {      
@@ -41,75 +39,10 @@ class PushToTelegram {
                     'text'    => $plaintext,
                 ]);
             } catch (Longman\TelegramBot\Exception\TelegramException $e) {
-            // log telegram errors
-            // echo $e->getMessage();
+
             }
-
-
-
-
-
-
-
         }
     }
-
-
-
-/*
-
-        if (!empty($imgurl)) {
-
-            $chatId = $telegramChatID;
-            $caption = $fullmsg;
-            //$photo = curl_file_create($imgurl,'image/jpeg',$filetitle);
-            //$photo = 'attach://'.$imgurl;
-            //$url = 'http://'.$imgurl;
-            $fv = $file->getApprovedVersion();
-            $path = $fv->getRelativePath();
-            $realpath = __DIR__ . $path;
-
-
-            $imgobj = new \CURLFile($photo = $realpath , $mime_type = 'multipart/form-data' , $posted_filename = 'Title' );
-            //$imgobj = new \CURLFile($realpath);
-            //$imgobj = 'http://backgroundimages.concrete5.org/wallpaper/20210415.jpg';
-          
-           
-            $logphoto = print_r($imgobj,1);
-            Log::addinfo('Obj: '. $logphoto);
-
-            $bot->sendPhoto($chatId,$imgobj,$caption,$replyToMessageId = null,$replyMarkup = null,$disableNotification = false,$parseMode = null);
-
-            return $response;
-
-        } else {
-            $bot->sendMessage($telegramChatID, $fullmsg, $parseMode = 'HTML');
-        }
-    }
-/*
-    public function sendPhoto(
-        $chatId,
-        $photo,
-        $caption = null,
-        $replyToMessageId = null,
-        $replyMarkup = null,
-        $disableNotification = false,
-        $parseMode = null
-    )
-    {
-
-        if (!empty($encoded_data)) {
-        	$bot->sendMessage($telegramChatID,
-        		              $fullmsg,
-        		              $caption = null,
-                              $replyToMessageId = null,
-                              $replyMarkup = null,
-                              $disableNotification = false,
-                              $parseMode = null);
-                              };
-        $bot->sendMessage($telegramChatID, $fullmsg, $parseMode = 'HTML');
-    }
-    */
 }
 
 
