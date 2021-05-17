@@ -15,7 +15,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 class PushToTwitter {
 
-    public function push($consumerKey,$consumerSecret,$accessToken,$accessTokenSecret,$page_name,$page_content,$publish_path,$imgurl,$file)
+    public function push($consumerKey,$consumerSecret,$accessToken,$accessTokenSecret,$page_name,$page_content,$publish_path,$encoded_data,$fullpath)
     {
     $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
     $content = $connection->get("account/verify_credentials");
@@ -28,12 +28,8 @@ class PushToTwitter {
             "utf-8"
         )
     );
-        if (!empty($imgurl)) {
+        if (!empty($fullpath)) {
             $connection->setTimeouts(10, 15);
-            $fv = $file->getApprovedVersion();
-            $path = $fv->getRelativePath();
-            $workpath = getcwd();
-            $fullpath = $workpath.$path;
             $media = $connection->upload('media/upload', ['media' => $fullpath]);
             $parameters = [
                 'status' => $plaintext,
@@ -45,7 +41,3 @@ class PushToTwitter {
         }  
     }
 }
-
-
-
-
