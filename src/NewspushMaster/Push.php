@@ -64,14 +64,18 @@ class Push {
         $push_to_news = $page->getAttribute('push_to_news');
 
         $f = $page->getAttribute('thumbnail');
+        
         if (!empty($f)){
         $fileID = $f->getFileID();
         $imgurl = $f->getURL();
         $file = \File::getByID($fileID);
         $version = $file->getVersionToModify();
         $filetitle = $version->getTitle();
-        //Log::addInfo('Das Bild: '.$imgurl.' Der Titel: '.$filetitle);
-        $encoded_data = base64_encode(file_get_contents($imgurl));    
+        $encoded_data = base64_encode($file->getFileContents());
+        $fv = $file->getApprovedVersion();
+        $path = $fv->getRelativePath();
+        $workpath = getcwd();
+        $fullpath = $workpath.$path;
         }
     
 
@@ -116,23 +120,19 @@ class Push {
             if(!empty($telegramBotToken)&&!empty($telegramChatID)&&!empty($activate_telegram)){
 
                 $push_to_telegram = new PushToTelegram;
-                //if(!empty($encoded_data)){
-                //    $push = $push_to_telegram->sendPhoto($telegramBotToken,$telegramChatID,$page_name,$page_content,$encoded_data);
-                //} else {
-                    $push = $push_to_telegram->push($telegramBotToken,$telegramChatID,$page_name,$page_content,$imgurl,$encoded_data,$filetitle,$file);
-                //}
+                $push = $push_to_telegram->push($telegramBotToken,$telegramChatID,$page_name,$page_content,$encoded_data,$fullpath);
             }
 
             if(!empty($consumerKey)&&!empty($consumerSecret)&&!empty($accessToken)&&!empty($accessTokenSecret)&&!empty($activate_twitter)){
 
                 $push_to_twitter = new PushToTwitter;
-                $push = $push_to_twitter->push($consumerKey,$consumerSecret,$accessToken,$accessTokenSecret,$page_name,$page_content,$publish_path,$imgurl,$file);
+                $push = $push_to_twitter->push($consumerKey,$consumerSecret,$accessToken,$accessTokenSecret,$page_name,$page_content,$publish_path,$encoded_data,$fullpath);
             }
 
             if(!empty($fb_app_id)&&!empty($fb_app_secret)&&!empty($fb_app_token)&&!empty($activate_facebook)){
 
                 $push_to_facebook = new PushToFacebook;
-                $push = $push_to_facebook->push($fb_app_id,$fb_app_secret,$fb_app_token,$page_name,$page_content,$publish_path,$file);
+                $push = $push_to_facebook->push($fb_app_id,$fb_app_secret,$fb_app_token,$page_name,$page_content,$encoded_data,$fullpath);
             }
         }
     }
