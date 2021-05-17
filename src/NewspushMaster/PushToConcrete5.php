@@ -87,8 +87,4 @@ class PushToConcrete5 {
                 Log::addInfo('Läuft durch: '.$secondresponse);
 
     }
-}	
-
-
-
-
+}
