@@ -18,7 +18,7 @@ use Concrete\Core\Attribute\Set as AttributeSet;
 class Controller extends Package {
 	protected $pkgHandle = 'newspush_master';
 	protected $appVersionRequired = '8.4';
-	protected $pkgVersion = '0.0.33';
+	protected $pkgVersion = '0.0.35';
 
     protected $pkgAutoloaderRegistries = [
         'src/NewspushMaster' => '\Concrete\Package\NewspushMaster',
