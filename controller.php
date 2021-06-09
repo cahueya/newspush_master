@@ -25,7 +25,7 @@ use \Concrete\Core\Page\Type\Composer\Control\CollectionAttributeControl as Attr
 use BlockType;
 use Concrete\Core\Backup\ContentImporter\Importer\Routine\ImportPageTypesBaseRoutine as CoreImportPageTypesBaseRoutine;
 use Concrete\Package\NewspushMaster\Backup\ContentImporter\Importer\Routine\ImportPageTypesBaseRoutine;
-use Concrete\Core\Page\Theme\Theme;
+use Concrete\Package\NewspushMaster\Theme\NewspusherTheme\PageTheme;
 
 class Controller extends Package {
 	protected $pkgHandle = 'newspush_master';
@@ -47,9 +47,10 @@ class Controller extends Package {
 
         $pkg = parent::install();
 
-        $theme =  Theme::install('newspusher_theme', $pkg);
-        $theme->applyToSite();
+	$pkg = parent::install();
         $this->app->bind(CoreImportPageTypesBaseRoutine::class, ImportPageTypesBaseRoutine::class);
+        $theme = PageTheme::add('newspusher_theme', $pkg);
+        $theme->applyToSite();
 
         $this->installXml();
         
