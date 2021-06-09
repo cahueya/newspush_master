@@ -4,6 +4,7 @@
         "zoonman/linkedin-api-php-client": "^0.0.14",
         "facebook/facebook-instant-articles-sdk-php": "^1.10",
         "longman/telegram-bot": "^0.72.0",
-        "abraham/twitteroauth": "^2.0"
+        "abraham/twitteroauth": "^2.0",
+        "ahmadawais/sendy-php-api": "^6.0"
     }
 }
