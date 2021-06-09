@@ -47,7 +47,6 @@ class Controller extends Package {
 
         $pkg = parent::install();
 
-	$pkg = parent::install();
         $this->app->bind(CoreImportPageTypesBaseRoutine::class, ImportPageTypesBaseRoutine::class);
         $theme = PageTheme::add('newspusher_theme', $pkg);
         $theme->applyToSite();
