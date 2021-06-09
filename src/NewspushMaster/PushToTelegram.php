@@ -11,13 +11,6 @@ class PushToTelegram {
 
     public function push($page,$pkg)
     {
-        //$pkg = Package::getByHandle('newspush_master');
-        //$u                = new User();
-        //$uid              = $u->getUserID();
-        //$user             = UserInfo::getByID($uid);
-        //$telegramBotToken = $user->getAttribute('user_telegramBotToken');
-        //$telegramChatID   = $user->getAttribute('user_telegramChatID');
-
         $telegramBotToken = $pkg->getConfig()->get('settings.newspusher.telegramBotToken');
         $telegramChatID   = $pkg->getConfig()->get('settings.newspusher.telegramChatID'  );
 
@@ -32,7 +25,7 @@ class PushToTelegram {
             $encoded_data = base64_encode($file->getFileContents());
             $fv = $file->getApprovedVersion();
             $path = $fv->getRelativePath();
-            $workpath = getcwd();
+            $workpath = DIR_BASE;
             $fullpath = $workpath.$path;
         }
         $blocks = $page->getBlocks('Main');
