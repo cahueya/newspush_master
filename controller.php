@@ -48,7 +48,7 @@ class Controller extends Package {
 
 		$pkg = parent::install();
 
-        $theme =  Concrete\Theme\Concrete\PageTheme::add('newspusher_theme', $pkg);
+        $theme =  \Concrete\Theme\Concrete\PageTheme::add('newspusher_theme', $pkg);
         $theme->applyToSite();
         $this->app->bind(CoreImportPageTypesBaseRoutine::class, ImportPageTypesBaseRoutine::class);
 
