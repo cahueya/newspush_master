@@ -26,7 +26,6 @@ use \Concrete\Core\Page\Type\Composer\Control\CollectionAttributeControl as Attr
 use BlockType;
 use Concrete\Core\Backup\ContentImporter\Importer\Routine\ImportPageTypesBaseRoutine as CoreImportPageTypesBaseRoutine;
 use Concrete\Package\NewspushMaster\Backup\ContentImporter\Importer\Routine\ImportPageTypesBaseRoutine;
-use PageTheme;
 
 class Controller extends Package {
 	protected $pkgHandle = 'newspush_master';
