@@ -18,15 +18,6 @@ class PushToConcrete5 {
 
     public function push($page,$pkg)
     {
-
-        //$u                  = $app->make(\Concrete\Core\User\User::class);
-        //$uid                = $u->getUserID();
-        //$user               = UserInfo::getByID($uid);
-        //$apiURL             = $user->getAttribute('user_apiURL');
-        //$api_pagepath       = $user->getAttribute('user_api_pagepath');
-        //$rest_client_id     = $user->getAttribute('user_rest_client_id');
-        //$rest_client_secret = $user->getAttribute('user_rest_client_secret');
-
         $apiURL             = $pkg->getConfig()->get('settings.newspusher.apiURL'            );
         $api_pagepath       = $pkg->getConfig()->get('settings.newspusher.api_pagepath'      );
         $rest_client_id     = $pkg->getConfig()->get('settings.newspusher.rest_client_id'    );
@@ -114,10 +105,6 @@ class PushToConcrete5 {
         ));  
         $secondresponse = curl_exec($curl);
         curl_close($curl);
-        //if (!"success") {
-            //throw new Exception("bla failed weil secondresponse not succuess")
-        //}
-        $page->setAttribute('push_status_rest',true);
     }
 }	
 
