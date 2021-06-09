@@ -13,12 +13,48 @@ use Log;
 
 class PushToFacebook {
 
-    public function push($fb_app_id,$fb_app_secret,$fb_app_token,$page_name,$page_content,$encoded_data,$fullpath)
+    public function push($page,$pkg)
     {
-        $pkg = Package::getByHandle('newspush_master');
-        $u = new User();
-        $uid = $u->getUserID();
-        $user = UserInfo::getByID($uid);
+        $fb_app_id     = $pkg->getConfig()->get('settings.newspusher.fb_app_id'    );
+        $fb_app_secret = $pkg->getConfig()->get('settings.newspusher.fb_app_secret');
+        $fb_app_pageid = $pkg->getConfig()->get('settings.newspusher.fb_app_pageid');
+        $fb_app_token  = $pkg->getConfig()->get('settings.newspusher.fb_app_token' );
+
+        $f = $page->getAttribute('thumbnail');
+        if (!empty($f)){
+                $fileID = $f->getFileID();
+                $imgurl = $f->getURL();
+                $file = \File::getByID($fileID);
+                $version = $file->getVersionToModify();
+                $filetitle = $version->getTitle();
+                $encoded_data = base64_encode($file->getFileContents());
+                $fv = $file->getApprovedVersion();
+                $path = $fv->getRelativePath();
+                $workpath = getcwd();
+                $fullpath = $workpath.$path;
+        }
+        $page_tags = $page->getAttribute('tags');
+        $page_name = $page->getCollectionName();
+        $page_url = \URL::to($page);
+        $page_description = $page->getCollectionDescription();
+        $page_path = $page->getCollectionPath();
+        $parent_id = $page->getCollectionParentID();
+        $parent_page = $page->getByID($parent_id);
+        $parent_path = $parent_page->getCollectionPath();
+        $pure_path = str_replace ($parent_path,'',$page_path);
+        $publish_path = $apiURL.'/index.php'.$api_pagepath.$pure_path;
+        if (!empty($apiURL)){
+            $publish_path = $apiURL.'/index.php'.$api_pagepath.$pure_path;
+        } else {
+            $publish_path= $page->getCollectionLink();
+        }
+
+        $blocks = $page->getBlocks('Main');
+        foreach ($blocks as $block) {
+            if ($block->btHandle == 'content') {
+                $page_content = $block->getInstance()->getContent();
+            }
+        }
 
         $message = strip_tags(
             html_entity_decode(
@@ -28,7 +64,7 @@ class PushToFacebook {
             )
         );
 
-        $fb_app_pageid = $user->getAttribute('user_fb_app_pageid');
+        $fb_app_pageid = $pkg->getConfig()->get('settings.newspusher.fb_app_pageid');
 
         $fb = new Facebook([
            'app_id' => $fb_app_id,
@@ -36,7 +72,7 @@ class PushToFacebook {
            'default_graph_version' => 'v2.10',
         ]);
 
-        $accessToken = $user->getAttribute('user_fb_app_long_page_token');
+        $accessToken = $pkg->getConfig()->get('settings.newspusher.fb_app_long_page_token');
 
         if(empty($fullpath)){   
             try {
@@ -62,6 +98,8 @@ class PushToFacebook {
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
                 echo 'Graph returned an error: '.$e->getMessage();
             }
+            
         }
+        $page->setAttribute('push_status_facebook',true);
     }
 }

@@ -5,23 +5,50 @@ use Core;
 use Events;
 use Log;
 use Loader;
+use \File;
+use Concrete\Core\User\UserInfo;
+use Concrete\Core\User\User;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 class PushToTwitter {
 
-    public function push($consumerKey,$consumerSecret,$accessToken,$accessTokenSecret,$page_name,$page_content,$publish_path,$encoded_data,$fullpath)
+    public function push($page,$pkg)
     {
-    $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-    $content = $connection->get("account/verify_credentials");
+        $consumerKey       = $pkg->getConfig()->get('settings.newspusher.tw_consumerKey'      );
+        $consumerSecret    = $pkg->getConfig()->get('settings.newspusher.tw_consumerSecret'   );
+        $accessToken       = $pkg->getConfig()->get('settings.newspusher.tw_accessToken'      );
+        $accessTokenSecret = $pkg->getConfig()->get('settings.newspusher.tw_accessTokenSecret');
 
-    $br = array("<br />","<br>","<br/>");
-    $plaintext = strip_tags(
-        html_entity_decode(
-            str_ireplace($br,'\n',$page_content),
-            ENT_COMPAT,
-            "utf-8"
-        )
-    );
+        $blocks = $page->getBlocks('Main');
+        foreach ($blocks as $block) {
+            if ($block->btHandle == 'content') {
+                $page_content = $block->getInstance()->getContent();
+            }
+        }
+        $f = $page->getAttribute('thumbnail');
+        if (!empty($f)){
+                $fileID = $f->getFileID();
+                $imgurl = $f->getURL();
+                $file = \File::getByID($fileID);
+                $fv = $file->getApprovedVersion();
+                $path = $fv->getRelativePath();
+                $workpath = getcwd();
+                $fullpath = $workpath.$path;
+        }
+
+        $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+        $connection->setTimeouts(10, 15);
+        $content = $connection->get("account/verify_credentials");
+
+        $br = array("<br />","<br>","<br/>");
+        $plaintext = strip_tags(
+            html_entity_decode(
+                str_ireplace($br,'\n',$page_content),
+                ENT_COMPAT,
+                "utf-8"
+            )
+        );
+
         if (!empty($fullpath)) {
             $connection->setTimeouts(10, 15);
             $media = $connection->upload('media/upload', ['media' => $fullpath]);
@@ -35,3 +62,7 @@ class PushToTwitter {
         }  
     }
 }
+
+
+
+
