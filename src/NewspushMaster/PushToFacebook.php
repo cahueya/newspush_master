@@ -30,7 +30,7 @@ class PushToFacebook {
                 $encoded_data = base64_encode($file->getFileContents());
                 $fv = $file->getApprovedVersion();
                 $path = $fv->getRelativePath();
-                $workpath = getcwd();
+                $workpath = DIR_BASE;
                 $fullpath = $workpath.$path;
         }
         $page_tags = $page->getAttribute('tags');
