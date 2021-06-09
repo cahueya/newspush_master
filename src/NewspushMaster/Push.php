@@ -144,13 +144,10 @@ class Push {
 
     public function run_job()
     {
-        Log::addInfo('Start Job');
         $app = Facade::getFacadeApplication();
         $dh = $app->make('helper/date');
         $time = $dh->toDB(new \DateTime());
         $pkg = Package::getByHandle('newspush_master');
-
-        Log::addInfo('UserID: '.$uid);
 
         $activate_rest_api = $pkg->getConfig()->get('settings.newspusher.activate_rest_api');
         $activate_telegram = $pkg->getConfig()->get('settings.newspusher.activate_telegram');
