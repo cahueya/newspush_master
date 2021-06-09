@@ -32,7 +32,7 @@ class PushToTwitter {
                 $file = \File::getByID($fileID);
                 $fv = $file->getApprovedVersion();
                 $path = $fv->getRelativePath();
-                $workpath = getcwd();
+                $workpath = DIR_BASE;
                 $fullpath = $workpath.$path;
         }
 
