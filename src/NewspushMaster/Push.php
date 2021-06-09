@@ -77,7 +77,7 @@ class Push {
                     try { 
                         $push_to_twitter = new PushToTwitter;
                         $push = $push_to_twitter->push($page,$pkg);
-                    } catch (\RuntimeException $e) {
+                    } catch (\Exception $e) {
                         Log::addWarning('Twitter failed: '.$e);
                         $page->setAttribute('push_status_twitter','2');
                         }
@@ -88,7 +88,7 @@ class Push {
                     try { 
                         $push_to_concrete5 = new PushToConcrete5;
                         $push = $push_to_concrete5->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('REST API failed: '.$e);
                         $page->setAttribute('push_status_rest','2');
                         }
@@ -99,7 +99,7 @@ class Push {
                     try { 
                         $push_to_facebook = new PushToFacebook;
                         $push = $push_to_facebook->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('Facebook failed: '.$e);
                         $page->setAttribute('push_status_facebook','2');
                         }
@@ -110,7 +110,7 @@ class Push {
                     try { 
                         $push_to_linkedin = new PushToLinkedin;
                         $push = $push_to_linkedin->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('LinkedIn failed: '.$e);
                         $page->setAttribute('push_status_linkedin','2');
                         }
@@ -121,7 +121,7 @@ class Push {
                     try { 
                         $push_to_sendy = new PushToSendy;
                         $push = $push_to_sendy->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('Sendy failed: '.$e);
                         $page->setAttribute('push_status_sendy','2');
                         }
@@ -132,7 +132,7 @@ class Push {
                     try { 
                         $push_to_telegram = new PushToTelegram;
                         $push = $push_to_telegram->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('Telegram failed: '.$e);
                         $page->setAttribute('push_status_telegram','2');
                         }
@@ -207,7 +207,7 @@ class Push {
                     try { 
                         $push_to_twitter = new PushToTwitter;
                         $push = $push_to_twitter->push($page,$pkg);
-                    } catch (\RuntimeException $e) {
+                    } catch (\Exception $e) {
                         Log::addWarning('Twitter failed: '.$e);
                         $page->setAttribute('push_status_twitter','2');
                         }
@@ -218,7 +218,7 @@ class Push {
                     try { 
                         $push_to_concrete5 = new PushToConcrete5;
                         $push = $push_to_concrete5->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('REST API failed: '.$e);
                         $page->setAttribute('push_status_rest','2');
                         }
@@ -229,7 +229,7 @@ class Push {
                     try { 
                         $push_to_facebook = new PushToFacebook;
                         $push = $push_to_facebook->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('Facebook failed: '.$e);
                         $page->setAttribute('push_status_facebook','2');
                         }
@@ -240,7 +240,7 @@ class Push {
                     try { 
                         $push_to_linkedin = new PushToLinkedin;
                         $push = $push_to_linkedin->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('LinkedIn failed: '.$e);
                         $page->setAttribute('push_status_linkedin','2');
                         }
@@ -251,7 +251,7 @@ class Push {
                     try { 
                         $push_to_sendy = new PushToSendy;
                         $push = $push_to_sendy->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('Sendy failed: '.$e);
                         $page->setAttribute('push_status_sendy','2');
                         }
@@ -262,7 +262,7 @@ class Push {
                     try { 
                         $push_to_telegram = new PushToTelegram;
                         $push = $push_to_telegram->push($page,$pkg);
-                        } catch (\RuntimeException $e) {
+                        } catch (\Exception $e) {
                         Log::addWarning('Telegram failed: '.$e);
                         $page->setAttribute('push_status_telegram','2');
                         }
