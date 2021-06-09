@@ -16,7 +16,6 @@ use Concrete\Core\Attribute\Type as AttributeType;
 use Concrete\Core\Attribute\Set as AttributeSet;
 use Concrete\Core\Page\Type\Type as PageType;
 use PageTemplate;
-use Concrete\Package\NewspushMaster\Theme\NewspusherTheme\PageTheme;
 use \Concrete\Core\Page\Type\PublishTarget\Type\Type as PublishTargetType;
 use \Concrete\Core\Attribute\Key\CollectionKey as CollectionKey;
 use \Concrete\Core\Page\Type\Composer\LayoutSet as LayoutSet;
