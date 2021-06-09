@@ -1,0 +1,103 @@
+.dp-cookies-popup {
+  border-bottom: 1px solid @brand-primary-color;
+
+  .btn-primary {
+    font-size: 0.875em;
+
+    &:hover {
+      background-color: white;
+      color: @brand-primary-color;
+      text-decoration: underline;
+    }
+  }
+
+  .btn-default {
+    font-size: 0.875em;
+
+    &:hover {
+      background-color: @brand-primary-color !important;
+      border-color: white;
+      color: white;
+
+      &:after {
+        border-right: none !important;
+      }
+    }
+
+    &:focus, :active {
+      outline: none;
+      border-color: white;
+    }
+
+    &:after {
+      border-bottom: none;
+      border-right: none;
+    }
+  }
+
+  .dp-cookies-popup-content {
+    > :first-child {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    line-height: 1.4;
+
+    p {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  .dp-cookies-popup-controls {
+    margin-top: 1em;
+  }
+}
+
+.db-disclaimer-wrapper {
+  .optout-option {
+    margin-bottom: 15px;
+    margin-top: 25px;
+
+    .card {
+      border: 1px solid @brand-primary-color;
+      background: transparent;
+      margin-bottom: 10px;
+      padding: 20px;
+      height: 100%;
+      font-size: .85em;
+      line-height: 1.4;
+    }
+
+    .card-header {
+      background: transparent;
+      border: 0;
+      padding: 0 0.5em;
+
+      input[type="checkbox"] {
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+    }
+
+    .card-body {
+      padding: 0 0.4em 0.3em;
+    }
+
+    input[type=checkbox].ios-toggler--round-flat {
+      &.ios-toggler--sm + span:before {
+        top: 1px;
+        bottom: 1.5px;
+      }
+
+      &:checked + span {
+        background-color: @brand-primary-color;
+
+        &:after {
+          background-color: @brand-primary-color;
+        }
+      }
+    }
+
+  }
+
+}

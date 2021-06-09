@@ -1,0 +1,91 @@
+div.xan-simple-accordion {
+  margin-bottom: @block-margin-bottom-size;
+
+  .simple-accordion-group {
+    margin-bottom: 1em;
+
+    &, &.closed {
+      .simple-accordion-title-shell {
+        background-color: @brand-primary-color;
+        overflow: auto;
+        padding: 3px 15px;
+        cursor: pointer;
+
+        .panel-title {
+          color: #fff;
+          font-weight: normal;
+          margin-bottom: 0 !important;
+          padding: 0.5em 0;
+
+
+          &:before {
+            content: '\f105';
+            font-family: "FontAwesome";
+            margin-right: 8px;
+          }
+        }
+
+      }
+    }
+
+    &.open {
+      .simple-accordion-title-shell {
+        background-color: transparent;
+        border: 1px solid @brand-primary-color;
+
+        .panel-title {
+          color: @brand-primary-color;
+          margin-bottom: 0 !important;
+
+          &:before {
+            content: '\f107';
+            font-family: "FontAwesome";
+            margin-right: 8px;
+          }
+        }
+      }
+
+      .simple-accordion-description {
+        display: block;
+      }
+    }
+
+    .simple-accordion-description {
+      padding: 1.07143em 0;
+      color: @simple-accordion-text-color;
+      background: transparent;
+      display: none;
+    }
+  }
+
+  &.panel-group {
+    .panel {
+      border-radius: 0;
+      margin-bottom: 10px;
+
+      .panel-heading {
+        padding: 5px 15px;
+        background-color: @simple-accordion-bootstrap-background-color;
+
+        .panel-title {
+          font-size: 1.2em !important;
+          font-weight: 500;
+          margin-bottom: 0 !important;
+
+          a {
+            display: block;
+            padding: 5px 0;
+          }
+        }
+      }
+
+      .panel-body {
+        p {
+          margin-bottom: 0;
+          font-size: 0.9em;
+        }
+      }
+    }
+
+  }
+}

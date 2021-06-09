@@ -1,0 +1,128 @@
+.timeline__slider-items {
+  .slick-list {
+    @media (max-width: 1024px) and (min-width: 767px) {
+      height: auto !important;
+    }
+
+    .timeline__slider-item {
+      height: inherit !important;
+
+      &.slick-current {
+        .timeline__slider-item-bubble {
+          background: @timeline-current-color;
+          height: 25px;
+          width: 25px;
+          border: 2px solid @timeline-current-color;
+          transform: translateY(0.2em);
+          margin-top: 1.3em;
+        }
+
+        .timeline__slider-item-headline {
+          font-weight: 700;
+          color: @timeline-current-color;
+        }
+
+        .timeline__slider-item-subline {
+          font-weight: 700;
+          color: @paragraph-type-color;
+        }
+      }
+
+      .timeline__slider-item-headline {
+        font-size: 1em;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        color: @brand-primary-color;
+        hyphens: auto;
+        line-height: 1.5;
+        padding-bottom: 0.5em;
+        transition: all .2s;
+      }
+
+      .timeline__slider-item-subline {
+        font-size: 0.9em;
+        color: @paragraph-type-color;
+        line-height: 1em;
+      }
+
+      .timeline__slider-item-bubble {
+        background-color: @timeline-buble-color;
+        border-radius: 50%;
+        display: inline-block;
+        height: 20px;
+        margin-top: 1.8em;
+        position: relative;
+        width: 20px;
+        transition: all .2s;
+      }
+
+      .timeline__slider-inner:after {
+        content: "";
+        background-color: @timeline-buble-color;
+        position: absolute;
+        display: block;
+        height: 1px;
+        left: 8%;
+        right: 8%;
+        bottom: 3.95em;
+        z-index: -1;
+      }
+    }
+  }
+}
+
+.timeline__slider-arrow-icon {
+  height: 10em;
+  width: 5em;
+  fill: @timeline-buble-color;
+}
+
+.timeline__slider-arrow {
+  transition: all .2s ease-out;
+}
+
+.timeline__slider-arrow--next:hover {
+  right: -10px;
+}
+
+.timeline__slider-arrow--prev:hover {
+  left: -10px;
+}
+
+.timeline__slider-inner {
+  margin-bottom: 2em;
+
+  &:after {
+    bottom: 2.7em;
+  }
+}
+
+@media (min-width: 36.25em) {
+  .timeline__slider-arrow {
+    bottom: -2.3em;
+  }
+}
+
+@media (min-width: 577px) {
+  .timeline__slider-tabs {
+    padding-left: 4em;
+    padding-right: 4em
+  }
+}
+
+@media (min-width: 769px) {
+  .timeline__slider-tabs {
+    padding-left: 5em;
+    padding-right: 5em
+  }
+}
+
+@media (min-width: 993px) {
+  .timeline__slider-tabs {
+    padding-left: 7em;
+    padding-right: 7em
+  }
+}
+
+
+
