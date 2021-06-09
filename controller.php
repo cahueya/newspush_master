@@ -31,7 +31,7 @@ use PageTheme;
 class Controller extends Package {
 	protected $pkgHandle = 'newspush_master';
 	protected $appVersionRequired = '8.4';
-	protected $pkgVersion = '0.0.97';
+	protected $pkgVersion = '0.0.99';
     protected $pkgAutoloaderRegistries = [
         'src/NewspushMaster' => '\Concrete\Package\NewspushMaster',
     ];
