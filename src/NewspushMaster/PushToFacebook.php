@@ -100,6 +100,5 @@ class PushToFacebook {
             }
             
         }
-        $page->setAttribute('push_status_facebook',true);
     }
 }
