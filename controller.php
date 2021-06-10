@@ -69,7 +69,7 @@ class Controller extends Package {
             $key->setAttributeKeyHandle('push_to_news');
             $key->setAttributeKeyName('Push this Page to News');
             $key = $category->add('boolean', $key, null, $pkg);
-            $key = $category->getByHandle('push_to_news');
+	    self::setPageTypeDefaults($key);
         }	
         $key = $category->getByHandle('push_date');
         if (!is_object($key)) {
@@ -118,25 +118,16 @@ class Controller extends Package {
             $key->setAttributeKeyName('Pushed to Sendy');
             $key = $category->add('text', $key, null, $pkg);
             $key = $category->getByHandle('push_status_sendy');
-        }   
-        
-        self::setPageTypeDefaults();
-
-        
-
+        }
     }
 
 
-    public function setPageTypeDefaults()
+    public function setPageTypeDefaults($key)
     {
-        $service = $this->app->make('Concrete\Core\Attribute\Category\CategoryService');
-        $categoryEntity = $service->getByHandle('collection');
-        $category = $categoryEntity->getController();
-        $key = $category->getByHandle('push_to_news');
         $pageType = PageType::getByHandle('blog_entry');
         $template = $pageType->getPageTypeDefaultPageTemplateObject();
         $pageObj = $pageType->getPageTypePageTemplateDefaultPageObject($template);
-        //$pageObj->setAttribute($key,1);
+        $pageObj->setAttribute($key,true);
     }
 
     private function installXml()
