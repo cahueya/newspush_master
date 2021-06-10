@@ -30,7 +30,7 @@ use Concrete\Package\NewspushMaster\Theme\NewspusherTheme\PageTheme as PageTheme
 class Controller extends Package {
 	protected $pkgHandle = 'newspush_master';
 	protected $appVersionRequired = '8.4';
-	protected $pkgVersion = '0.0.102';
+	protected $pkgVersion = '0.0.104';
     protected $pkgAutoloaderRegistries = [
         'src/NewspushMaster' => '\Concrete\Package\NewspushMaster',
     ];
